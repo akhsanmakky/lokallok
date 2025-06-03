@@ -1,50 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize AOS animation library
-    AOS.init({
-        once: true,
-        easing: 'ease-in-out',
-        duration: 800,
-    });
+// Inisialisasi AOS
+AOS.init({
+  duration: 700,
+  once: true,
+});
 
-    // Navbar toggle logic
-    const showNavbarBtn = document.getElementById('showNavbarBtn');
-    const navbar = document.querySelector('nav.navbar'); // sesuaikan selector navbar
+// Tombol Back to Top
+const backToTopBtn = document.getElementById('backToTopBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 150) {
+    backToTopBtn.style.display = 'block';
+  } else {
+    backToTopBtn.style.display = 'none';
+  }
+});
 
-    function toggleNavbarVisibility() {
-        if (navbar.classList.contains('d-none') || navbar.style.display === 'none') {
-            showNavbarBtn.style.display = 'block';
-        } else {
-            showNavbarBtn.style.display = 'none';
-        }
-    }
-    toggleNavbarVisibility();
+backToTopBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-    showNavbarBtn.addEventListener('click', () => {
-        navbar.style.display = 'block';
-        showNavbarBtn.style.display = 'none';
-    });
+// Toggle Navbar (contoh, bisa dikembangkan)
+const toggleNavbarBtn = document.getElementById('toggleNavbarBtn');
+const navbar = document.querySelector('.navbar');
+const showNavbarBtn = document.getElementById('showNavbarBtn');
 
-    // Back to Top button
-    const backToTopBtn = document.getElementById('backToTopBtn');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.style.display = 'block';
-        } else {
-            backToTopBtn.style.display = 'none';
-        }
-    });
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+toggleNavbarBtn.addEventListener('click', () => {
+  if (navbar.style.display !== 'none') {
+    navbar.style.display = 'none';
+    showNavbarBtn.style.display = 'block';
+  } else {
+    navbar.style.display = 'flex';
+    showNavbarBtn.style.display = 'none';
+  }
+});
 
-    // Smooth scrolling for anchor links with .btn-scroll class
-    document.querySelectorAll('a.btn-scroll[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
+showNavbarBtn.addEventListener('click', () => {
+  navbar.style.display = 'flex';
+  showNavbarBtn.style.display = 'none';
 });
