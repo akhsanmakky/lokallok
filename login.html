@@ -1,0 +1,202 @@
+{% extends 'layout.html' %}
+{% block title %}Login Admin{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="form-container">
+                <div class="login-header">
+                    <h2 class="mb-4">
+                        <i class="bi bi-box-arrow-in-right me-2"></i> Login Admin
+                    </h2>
+                    <div class="login-icon">
+                        <i class="bi bi-person-lock"></i>
+                    </div>
+                </div>
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3 form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control form-control-lg input-field" id="username" name="username" placeholder="Masukkan username Anda" required>
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control form-control-lg input-field" id="password" name="password" placeholder="Masukkan password Anda" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg login-button">
+                            <i class="bi bi-arrow-right-square-fill me-2"></i> Login
+                        </button>
+                    </div>
+                </form>
+                {% if not admin_exists %}
+                <div class="mt-4 text-center">
+                    <p class="mb-0 text-muted">Belum punya akun?</p>
+                    <a href="{{ url_for('register') }}" class="register-link">
+                        <i class="bi bi-person-plus-fill me-1"></i> Register Admin Pertama
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        const typeText = (element, text, delay) => {
+            let index = 0;
+            const timer = setInterval(() => {
+                if (index < text.length) {
+                    element.value += text.charAt(index);
+                    index++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, delay);
+        };
+
+        // If you want the username and password to auto-fill (for demo purposes)
+        // Adjust these values to match your testing credentials
+        const demoUsername = "admin";
+        const demoPassword = "password123";
+
+        // Only trigger the typing effect if the input is empty
+        if (usernameInput.value === "") {
+            typeText(usernameInput, demoUsername, 50); // Adjust speed (50ms) as needed
+        }
+        if (passwordInput.value === "") {
+            typeText(passwordInput, demoPassword, 50); // Adjust speed (50ms) as needed
+        }
+    });
+</script>
+
+{% endblock %}
+
+<style>
+    /* (CSS dari jawaban sebelumnya) */
+    /* Gaya Umum  */
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    .form-container {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .form-container:hover {
+        box-shadow: 0 0.75rem 1.25rem rgba(0, 0, 0, 0.2);
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #495057;
+    }
+
+    .form-control-lg {
+        border-radius: 0.75rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        transform: scale(1.03);
+    }
+
+    .text-muted {
+        opacity: 0.8;
+    }
+
+    /* Gaya Khusus Login  */
+    .login-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .login-icon {
+        position: absolute;
+        top: -2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3rem;
+        color: #007bff;
+        opacity: 0.7;
+        animation: pulse 1.5s infinite;
+    }
+
+    .input-field {
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .input-field:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    }
+
+    .login-button {
+        animation: slideIn 0.5s ease-out;
+    }
+
+    .register-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .register-link:hover {
+        color: #0056b3;
+    }
+
+    /* Animasi  */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: translateX(-50%) scale(1);
+        }
+        50% {
+            transform: translateX(-50%) scale(1.05);
+        }
+        100% {
+            transform: translateX(-50%) scale(1);
+        }
+    }
+</style>

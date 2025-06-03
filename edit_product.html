@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Produk - Lokalook</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+      padding: 40px;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      animation: fadeInDown 0.8s ease forwards;
+    }
+
+    form {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      padding: 30px 35px;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+      background-color: #fafafa;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="url"]:focus,
+    textarea:focus {
+      border-color: #27ae60;
+      box-shadow: 0 0 8px rgba(39, 174, 96, 0.5);
+      background-color: #fff;
+      animation: pulseBorder 1.2s infinite;
+    }
+
+    textarea {
+      height: 130px;
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.4;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background-color: #27ae60;
+      color: white;
+      padding: 14px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #219150;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(33, 145, 80, 0.6);
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(0);
+      box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4);
+    }
+
+    p a {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: #2980b9;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+      color: #1c5980;
+    }
+
+    /* Animations */
+    @keyframes pulseBorder {
+      0%, 100% {
+        border-color: #27ae60;
+        box-shadow: 0 0 8px rgba(39, 174, 96, 0.5);
+      }
+      50% {
+        border-color: #2ecc71;
+        box-shadow: 0 0 15px rgba(46, 204, 113, 0.7);
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Edit Produk</h1>
+  <form method="POST" action="{{ url_for('edit_product', id=product.id) }}">
+    <input type="text" name="name" placeholder="Nama Produk" value="{{ product.name }}" required />
+    <input type="number" name="price" placeholder="Harga (Rp)" value="{{ product.price }}" min="0" step="1000" required />
+    <input type="number" name="stock" placeholder="Stok Produk" value="{{ product.stock }}" min="0" required />
+    <textarea name="description" placeholder="Deskripsi Produk">{{ product.description }}</textarea>
+    <input type="url" name="image_url" placeholder="URL Gambar Produk" value="{{ product.image_url }}" required />
+    <button type="submit">Update</button>
+  </form>
+  <p><a href="{{ url_for('admin_dashboard') }}">Kembali ke Dashboard</a></p>
+</body>
+</html>

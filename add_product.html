@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block title %}Tambah Produk - Lokalook{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title mb-4"><i class="bi bi-plus-square-fill me-2"></i> Tambah Produk Baru</h2>
+                    <form method="POST" action="{{ url_for('add_product') }}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name"
+                                   placeholder="Nama Produk" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Harga (Rp)</label>
+                            <input type="number" class="form-control form-control-lg" id="price" name="price"
+                                   placeholder="Harga (Rp)" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi Produk</label>
+                            <textarea class="form-control form-control-lg" id="description" name="description"
+                                      placeholder="Deskripsi Produk" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image_url" class="form-label">URL Gambar</label>
+                            <input type="text" class="form-control form-control-lg" id="image_url" name="image_url"
+                                   placeholder="URL Gambar Produk" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-save-fill me-2"></i> Simpan Produk
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-3">
+                        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left-circle-fill me-2"></i> Kembali ke Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
