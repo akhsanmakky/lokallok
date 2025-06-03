@@ -1,24 +1,158 @@
-/* Fade-in animation */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1s forwards;
-}
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Reset dan container */
+* {
+  box-sizing: border-box;
 }
 
-/* Card hover effect */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f9faff;
+  margin: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 12px 0;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+/* Toggle Navbar Btn */
+#toggleNavbarBtn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Tombol untuk menampilkan navbar (hidden by default) */
+.btn-show-navbar {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 0.2);
+}
+
+/* Main Content */
+.main-content {
+  padding: 40px 0;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.6rem;
+  margin-bottom: 30px;
+  color: #004a99;
+}
+
+/* Product Card */
+.product-card {
+  background: #fff;
+  padding: 25px;
+  margin: 0 auto;
+  max-width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgb(0 0 0 / 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
 .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    z-index: 10;
+  box-shadow: 0 10px 18px rgb(0 0 0 / 0.15);
 }
 
-/* Smooth button hover */
-button.btn:hover, a.btn:hover {
-    transform: scale(1.05);
+.product-card h3 {
+  margin-top: 0;
+  color: #007BFF;
+}
+
+.product-card p {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007BFF;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Back to Top Button */
+.btn-back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  padding: 12px 18px;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-back-to-top:hover {
+  background-color: #0056b3;
+}
+
+/* Animations */
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 1s forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInAnimation {
+  to {
+    opacity: 1;
+  }
 }
