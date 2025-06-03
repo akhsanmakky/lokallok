@@ -1,283 +1,45 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Halaman Index</title>
 
-{% block title %}Brand Lokalook{% endblock %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
 
-{% block content %}
-
-<!-- Tombol tampilkan Navbar (sticky di kiri atas, hidden default) -->
-<button id="showNavbarBtn" class="btn btn-primary position-fixed top-0 start-0 m-3"
-        style="display: none; z-index: 1051; box-shadow: 0 4px 8px rgba(0,0,0,0.15); border-radius: 50px;">
-    <i class="bi bi-eye-fill"></i> Tampilkan Navbar
-</button>
-
-<!-- HERO SECTION -->
-<section class="hero py-5 mb-5 rounded-3 shadow-sm fade-in" 
-         style="scroll-margin-top: 80px; 
-                background: linear-gradient(135deg, #0bc260, #64b5f6); 
-                color: white !important; 
-                box-shadow: 0 10px 25px rgba(78, 154, 241, 0.4);" 
-         data-aos="fade-down" data-aos-duration="1500">
-
-    <div class="container py-5 text-center">
-        <h1 class="display-3 fw-bold" style="text-shadow: 0 1px 3px rgba(0,0,0,0.3);">Brand Lokalook</h1>
-        <p class="lead mb-4" style="color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
-            Temukan dan dukung produk fashion lokal berkualitas tinggi.
-        </p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-            <a href="#products" class="btn btn-light btn-lg px-4 btn-scroll" 
-               style="color:#1c5da7; font-weight:600; text-shadow:none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
-                <i class="bi bi-bag-fill me-2"></i> Jelajahi Produk
-            </a>
-        </div>
-
-        <!-- Search Bar -->
-        <form class="d-flex justify-content-center mt-3" method="GET" action="{{ url_for('search') }}">
-            <input
-                class="form-control w-50 me-2 shadow-sm border-primary"
-                type="search"
-                name="q"
-                placeholder="Cari produk..."
-                aria-label="Cari produk"
-                required
-                style="font-family: 'Poppins', Arial, sans-serif; transition: box-shadow 0.3s ease;"
-                onfocus="this.style.boxShadow='0 0 8px 2px #4e9af1';"
-                onblur="this.style.boxShadow='';"
-            />
-            <button class="btn btn-success d-flex align-items-center" type="submit" aria-label="Tombol cari produk"
-                    style="transition: background-color 0.3s ease;">
-                <i class="bi bi-search"></i>
-            </button>
-        </form>
-
-        <!-- Pesan ketika produk kosong -->
-        {% if products|length == 0 %}
-        <div class="mt-4 animate__animated animate__fadeIn">
-            <p class="lead text-white fst-italic" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
-                Maaf, saat ini belum ada produk yang tersedia. Nantikan koleksi terbaru kami!
-            </p>
-        </div>
-        {% endif %}
-    </div>
-</section>
-
-<!-- PRODUK SECTION -->
-<div class="container mb-5 fade-in" id="products" style="scroll-margin-top: 80px;">
-    <div class="text-center mb-4" data-aos="fade-up" data-aos-duration="1200">
-        <h2 class="fw-bold" style="font-family: 'Poppins', Arial, sans-serif;">Produk Pilihan Kami</h2>
-        <p class="text-muted" style="font-size: 1.1rem;">Inspirasi gaya lokal terbaik menanti Anda.</p>
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for product in products %}
-        <div class="col" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 100 }}" data-aos-duration="800">
-            <div class="card h-100 shadow-sm border-0 product-card" 
-                 style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
-                        transition: transform 0.4s ease, box-shadow 0.4s ease;">
-                <a href="{{ url_for('detail_product', product_id=product.id) }}" 
-                   class="text-decoration-none text-dark" aria-label="Detail produk {{ product.name }}">
-                    <img src="{{ product.image_url }}" class="card-img-top" alt="Gambar {{ product.name }}" loading="lazy"
-                         style="border-top-left-radius: 12px; border-top-right-radius: 12px;" />
-                    <div class="card-body" style="font-family: 'Poppins', Arial, sans-serif;">
-                        <h5 class="card-title fw-bold">{{ product.name }}</h5>
-                        <p class="card-text"><small class="text-muted">Produk Lokal</small></p>
-                        <p class="card-price h5 text-success fw-bold" style="color: #2e7d32;">Rp {{ "{:,.0f}".format(product.price) }}</p>
-                    </div>
-                </a>
-                <div class="card-footer bg-white border-top-0">
-                    <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST" 
-                          aria-label="Tambah produk {{ product.name }} ke keranjang">
-                        <div class="d-grid gap-2">
-                            <button
-                                type="submit"
-                                class="btn btn-outline-success btn-sm"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                title="Tambah ke keranjang"
-                                style="transition: background-color 0.3s ease, color 0.3s ease;"
-                            >
-                                <i class="bi bi-cart-plus-fill me-2"></i> Tambah Keranjang
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- Pagination -->
-    {% if pagination %}
-    <nav aria-label="Navigasi produk" class="mt-4" data-aos="fade-up" data-aos-duration="1200">
-        <ul class="pagination justify-content-center">
-            {% if pagination.has_prev %}
-            <li class="page-item">
-                <a class="page-link" href="{{ url_for('index', page=pagination.prev_num) }}">Sebelumnya</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled"><span class="page-link">Sebelumnya</span></li>
-            {% endif %}
-
-            {% for page_num in pagination.iter_pages() %}
-                {% if page_num %}
-                    {% if page_num == pagination.page %}
-                        <li class="page-item active"><span class="page-link">{{ page_num }}</span></li>
-                    {% else %}
-                        <li class="page-item"><a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a></li>
-                    {% endif %}
-                {% else %}
-                    <li class="page-item disabled"><span class="page-link">…</span></li>
-                {% endif %}
-            {% endfor %}
-
-            {% if pagination.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="{{ url_for('index', page=pagination.next_num) }}">Selanjutnya</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled"><span class="page-link">Selanjutnya</span></li>
-            {% endif %}
-        </ul>
+    <!-- Navbar -->
+    <nav class="navbar" style="background-color:#007BFF; color:#fff; padding: 10px;">
+        <span>Navbar Brand</span>
     </nav>
-    {% endif %}
-</div>
 
-<!-- About & Contact Section -->
-<div class="container mt-5">
-    <section class="mb-5" data-aos="fade-up" data-aos-duration="1200">
-        <h2 class="mb-4 text-primary"><i class="bi bi-info-circle-fill me-2"></i> Kisah di Balik Lokalook</h2>
-        <p class="lead">Selamat datang di <strong>Lokalook</strong>, sebuah platform yang lahir dari kecintaan terhadap produk lokal dan keinginan untuk mendukung para pengrajin serta desainer berbakat di seluruh Indonesia.</p>
-        <p>Kami percaya bahwa setiap produk lokal memiliki cerita unik dan nilai yang mendalam. Melalui Lokalook, kami hadir untuk menjembatani Anda dengan kekayaan kreativitas lokal, memungkinkan Anda menemukan produk-produk berkualitas tinggi yang tidak hanya mempercantik gaya Anda, tetapi juga memberikan dampak positif bagi komunitas.</p>
-    </section>
+    <!-- Tombol untuk menampilkan navbar jika disembunyikan -->
+    <button id="showNavbarBtn" style="display:none; position:fixed; top:10px; left:10px; z-index:1000;">
+        Tampilkan Navbar
+    </button>
 
-    <section class="mb-5" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
-        <h2 class="mb-4 text-primary"><i class="bi bi-bullseye me-2"></i> Misi Kami</h2>
-        <p>Misi utama kami adalah untuk:</p>
-        <ul>
-            <li><strong>Mendukung Ekonomi Lokal:</strong> Memberikan wadah bagi para pengusaha kecil dan menengah (UMKM) serta pengrajin lokal untuk memasarkan produk mereka kepada khalayak yang lebih luas.</li>
-            <li><strong>Mempromosikan Produk Berkualitas:</strong> Menawarkan beragam pilihan produk fashion dan aksesoris lokal yang terbuat dari bahan berkualitas dengan desain yang menarik.</li>
-            <li><strong>Menginspirasi Gaya Unik:</strong> Membantu Anda menemukan gaya personal Anda melalui koleksi produk yang beragam dan otentik.</li>
-            <li><strong>Membangun Komunitas:</strong> Menciptakan komunitas yang saling mendukung antara konsumen dan produsen lokal, menghargai nilai dan proses di balik setiap produk.</li>
-        </ul>
-    </section>
+    <!-- Konten utama -->
+    <main style="padding: 20px;">
+        <h1 data-aos="fade-up" class="fade-in">Selamat datang di Halaman Index</h1>
 
-    <section class="mb-5" data-aos="fade-up" data-aos-duration="1200" data-aos-delay="200">
-        <h2 class="mb-4 text-primary"><i class="bi bi-people-fill me-2"></i> Tim Lokalook</h2>
-        <p><em>Lokalook</em> didirikan oleh sekelompok individu yang memiliki visi yang sama untuk memajukan produk lokal Indonesia. Kami terdiri dari para profesional di bidang teknologi, desain, dan pemasaran yang bersemangat untuk mewujudkan platform ini.</p>
-        <p>Kami percaya pada kolaborasi dan inovasi untuk terus mengembangkan Lokalook menjadi platform yang bermanfaat bagi semua pihak.</p>
-    </section>
+        <div class="product-card" data-aos="fade-up" style="background:#eee; padding:20px; margin-top:30px; max-width:300px;">
+            <h3>Produk 1</h3>
+            <p>Deskripsi produk singkat.</p>
+            <button class="btn">Beli Sekarang</button>
+        </div>
+    </main>
 
-    <section data-aos="fade-up" data-aos-duration="1200" data-aos-delay="300">
-        <h2 class="mb-4 text-primary"><i class="bi bi-chat-dots-fill me-2"></i> Hubungi Kami</h2>
-        <p>Kami sangat terbuka untuk pertanyaan, masukan, maupun kerja sama. Silakan hubungi kami melalui:</p>
-        <ul>
-            <li>Email: <a href="mailto:info@lokalook.com" class="link-primary">info@lokalook.com</a></li>
-            <li>Telepon: <a href="tel:+628123456789" class="link-primary">+62 812 3456 789</a></li>
-            <li>Media Sosial:
-                <a href="https://instagram.com/lokalook" target="_blank" class="ms-2 link-primary">
-                    <i class="bi bi-instagram"></i> Instagram
-                </a>,
-                <a href="https://facebook.com/lokalook" target="_blank" class="ms-2 link-primary">
-                    <i class="bi bi-facebook"></i> Facebook
-                </a>,
-                <a href="https://twitter.com/lokalook" target="_blank" class="ms-2 link-primary">
-                    <i class="bi bi-twitter"></i> Twitter
-                </a>
-            </li>
-        </ul>
-    </section>
-</div>
+    <!-- Tombol Back to Top -->
+    <button id="backToTopBtn" style="display:none; position:fixed; bottom:30px; right:30px; padding:10px 15px; font-size:16px; border:none; background:#007BFF; color:#fff; border-radius:5px; cursor:pointer;">
+        ↑ Top
+    </button>
 
-<!-- Back to Top Button -->
-<button id="backToTopBtn" title="Kembali ke atas" aria-label="Kembali ke atas"
-        class="btn btn-primary position-fixed bottom-0 end-0 m-4" style="display:none; z-index: 1050; border-radius: 50%;">
-    <i class="bi bi-arrow-up-circle-fill fs-4"></i>
-</button>
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-{% endblock %}
-
-{% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Initialize AOS animation library
-        AOS.init({
-            once: true,
-            easing: 'ease-in-out',
-            duration: 800,
-        });
-
-        // Navbar toggle logic (assuming you have navbar toggling somewhere)
-        const showNavbarBtn = document.getElementById('showNavbarBtn');
-        const navbar = document.querySelector('nav.navbar'); // Adjust selector as needed
-
-        // Example: Show/hide navbar toggle button when navbar is hidden
-        function toggleNavbarVisibility() {
-            if (navbar.classList.contains('d-none') || navbar.style.display === 'none') {
-                showNavbarBtn.style.display = 'block';
-            } else {
-                showNavbarBtn.style.display = 'none';
-            }
-        }
-        toggleNavbarVisibility();
-
-        showNavbarBtn.addEventListener('click', () => {
-            navbar.style.display = 'block';
-            showNavbarBtn.style.display = 'none';
-        });
-
-        // Back to Top button
-        const backToTopBtn = document.getElementById('backToTopBtn');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
-            }
-        });
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Smooth scrolling for anchor links with .btn-scroll class
-        document.querySelectorAll('a.btn-scroll[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    });
-</script>
-
-<style>
-    /* Fade-in animation */
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 1s forwards;
-    }
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Card hover effect */
-    .product-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        z-index: 10;
-    }
-
-    /* Smooth button hover */
-    button.btn:hover, a.btn:hover {
-        transform: scale(1.05);
-    }
-</style>
-
-{% endblock %}
+</body>
+</html>
