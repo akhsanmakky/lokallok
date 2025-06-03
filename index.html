@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Halaman Index</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Halaman Index - Lokalook</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  
+  <style>
+    /* Fallback minimal styling supaya enak dilihat sebelum CSS utama dimuat */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9faff;
+      margin: 0;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar" style="background-color:#007BFF; color:#fff; padding: 10px;">
-        <span>Navbar Brand</span>
-    </nav>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <span class="brand">Lokalook</span>
+      <button id="toggleNavbarBtn" aria-label="Toggle Navbar">☰</button>
+    </div>
+  </nav>
 
-    <!-- Tombol untuk menampilkan navbar jika disembunyikan -->
-    <button id="showNavbarBtn" style="display:none; position:fixed; top:10px; left:10px; z-index:1000;">
-        Tampilkan Navbar
-    </button>
+  <!-- Tombol untuk menampilkan navbar jika disembunyikan -->
+  <button id="showNavbarBtn" class="btn-show-navbar" style="display:none;">
+    Tampilkan Navbar
+  </button>
 
-    <!-- Konten utama -->
-    <main style="padding: 20px;">
-        <h1 data-aos="fade-up" class="fade-in">Selamat datang di Halaman Index</h1>
+  <!-- Konten utama -->
+  <main class="main-content container">
+    <h1 data-aos="fade-up" class="fade-in">Selamat datang di Lokalook</h1>
 
-        <div class="product-card" data-aos="fade-up" style="background:#eee; padding:20px; margin-top:30px; max-width:300px;">
-            <h3>Produk 1</h3>
-            <p>Deskripsi produk singkat.</p>
-            <button class="btn">Beli Sekarang</button>
-        </div>
-    </main>
+    <div class="product-card" data-aos="fade-up" data-aos-delay="150">
+      <h3>Produk 1</h3>
+      <p>Deskripsi produk singkat yang menarik dan informatif.</p>
+      <button class="btn btn-primary">Beli Sekarang</button>
+    </div>
+  </main>
 
-    <!-- Tombol Back to Top -->
-    <button id="backToTopBtn" style="display:none; position:fixed; bottom:30px; right:30px; padding:10px 15px; font-size:16px; border:none; background:#007BFF; color:#fff; border-radius:5px; cursor:pointer;">
-        ↑ Top
-    </button>
+  <!-- Tombol Back to Top -->
+  <button id="backToTopBtn" class="btn-back-to-top" title="Kembali ke atas" aria-label="Back to top">
+    ↑
+  </button>
 
-    <!-- JS -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
