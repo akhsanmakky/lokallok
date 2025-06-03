@@ -1,0 +1,260 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Variabel CSS untuk kemudahan kustomisasi */
+:root {
+    --primary-color: #010a12;         /* Biru gelap */
+    --secondary-color: #010a10;       /* Biru cerah */
+    --success-color: #28a745;         /* Hijau untuk sukses/registrasi */
+    --light-color: #ecf0f1;           /* Abu-abu terang */
+    --dark-color: #fdfeff;
+    --font-family: 'Poppins', sans-serif;
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --card-radius: 10px;
+    --transition-duration: 0.3s;
+    --transition-easing: ease-in-out;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: #f8f9fa;
+    color: var(--dark-color);
+    transition: background-color var(--transition-duration) var(--transition-easing);
+}
+
+/* Navbar */
+.navbar {
+    background-color: #a82323 !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08);
+    padding: 0.75rem 1rem;
+    transition: box-shadow var(--transition-duration) var(--transition-easing), background-color var(--transition-duration) var(--transition-easing);
+}
+.navbar.scrolled {
+    background-color: rgba(158, 18, 18, 0.9);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--primary-color) !important;
+    transition: color var(--transition-duration) var(--transition-easing);
+}
+.navbar-brand:hover {
+    color: #1d2a38 !important;
+}
+.navbar-nav .nav-link {
+    color: #fcfafa;
+    margin-left: 1rem;
+    transition: color var(--transition-duration) var(--transition-easing);
+}
+.navbar-nav .nav-link:hover {
+    color: var(--secondary-color);
+}
+.navbar-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+/* Tombol */
+.btn {
+    transition: background-color var(--transition-duration) var(--transition-easing),
+                border-color var(--transition-duration) var(--transition-easing),
+                transform 0.2s ease-in-out;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: #000912;
+    border-color: #3e5670;
+}
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+.btn-outline-dark {
+    border-color: #343a40;
+    color: #343a40;
+}
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+.btn-outline-success {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-outline-success:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+/* Badge Keranjang */
+.badge-danger {
+    background-color: #dc3545;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Kartu produk */
+.product-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+/* Efek shadow biasa */
+.product-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Gambar di dalam kartu */
+.product-card img {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    object-fit: cover;
+    height: 220px;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+/* Efek zoom gambar saat hover kartu */
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Judul produk */
+.product-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/* Harga produk */
+.product-card .card-price {
+    font-weight: 700;
+    color: #28a745; /* hijau bootstrap */
+}
+
+/* Tombol tambah keranjang */
+.product-card .btn-outline-success {
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover tombol */
+.product-card .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+/* Footer kartu */
+.product-card .card-footer {
+    background-color: transparent;
+}
+
+
+/* Halaman Detail Produk */
+.detail-img {
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease-in-out;
+}
+.detail-img:hover {
+    transform: scale(1.05);
+}
+.detail-info h1 {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.detail-info .price {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+/* Halaman Keranjang */
+.cart-table {
+    background-color: #fff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+.cart-table tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+.cart-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Form Container (Login & Registrasi) */
+.form-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+.form-container h2 {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+    position: relative; /* pastikan ini relative atau static */
+    bottom: auto;
+    width: 100%;
+}
+
+
+/* Animasi fade-in */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn ease 1s forwards;
+    animation-delay: 0.3s;
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .product-card .card-img-top {
+        height: 200px;
+    }
+    .form-container {
+        max-width: 100%;
+        padding: 1rem;
+    }
+}

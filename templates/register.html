@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+{% block title %}Registrasi Admin{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="form-container">
+                <h2 class="mb-4">
+                    <i class="bi bi-person-plus-fill me-2"></i> Registrasi Admin
+                </h2>
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="mb-3 form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Pilih username Anda" required>
+                        {% if error and 'username' in error %}
+                            <div class="error-message">{{ error['username'] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Alamat email Anda" required>
+                        {% if error and 'email' in error %}
+                            <div class="error-message">{{ error['email'] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Buat password yang kuat" required>
+                        {% if error and 'password' in error %}
+                            <div class="error-message">{{ error['password'] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="confirm_password" class="form-label">Konfirmasi Password</label>
+                        <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" placeholder="Ketik ulang password Anda" required>
+                        {% if error and 'confirm_password' in error %}
+                            <div class="error-message">{{ error['confirm_password'] }}</div>
+                        {% endif %}
+                        {% if error and 'password_mismatch' in error %}
+                            <div class="error-message">{{ error['password_mismatch'] }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-person-plus-fill me-2"></i> Daftar
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-4 text-center">
+                    <p class="mb-0 text-muted">Sudah punya akun?</p>
+                    <a href="{{ url_for('login') }}" class="text-decoration-none">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Login Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

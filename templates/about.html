@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block title %}Tentang Kami - Lokalook{% endblock %}
+{% block content %}
+<div class="container mt-5">
+
+    <section class="mb-5" data-aos="fade-up">
+        <h2 class="mb-4 text-primary"><i class="bi bi-info-circle-fill me-2"></i> Kisah di Balik Lokalook</h2>
+        <p class="lead">Selamat datang di <strong>Lokalook</strong>, sebuah platform yang lahir dari kecintaan terhadap produk lokal dan keinginan untuk mendukung para pengrajin serta desainer berbakat di seluruh Indonesia.</p>
+        <p>Kami percaya bahwa setiap produk lokal memiliki cerita unik dan nilai yang mendalam. Melalui Lokalook, kami hadir untuk menjembatani Anda dengan kekayaan kreativitas lokal, memungkinkan Anda menemukan produk-produk berkualitas tinggi yang tidak hanya mempercantik gaya Anda, tetapi juga memberikan dampak positif bagi komunitas.</p>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="mb-4 text-primary"><i class="bi bi-bullseye me-2"></i> Misi Kami</h2>
+        <p>Misi utama kami adalah untuk:</p>
+        <ul>
+            <li><strong>Mendukung Ekonomi Lokal:</strong> Memberikan wadah bagi para pengusaha kecil dan menengah (UMKM) serta pengrajin lokal untuk memasarkan produk mereka kepada khalayak yang lebih luas.</li>
+            <li><strong>Mempromosikan Produk Berkualitas:</strong> Menawarkan beragam pilihan produk fashion dan aksesoris lokal yang terbuat dari bahan berkualitas dengan desain yang menarik.</li>
+            <li><strong>Menginspirasi Gaya Unik:</strong> Membantu Anda menemukan gaya personal Anda melalui koleksi produk yang beragam dan otentik.</li>
+            <li><strong>Membangun Komunitas:</strong> Menciptakan komunitas yang saling mendukung antara konsumen dan produsen lokal, menghargai nilai dan proses di balik setiap produk.</li>
+        </ul>
+    </section>
+
+    <section class="mb-5" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="mb-4 text-primary"><i class="bi bi-people-fill me-2"></i> Tim Lokalook</h2>
+        <p><em>Lokalook</em> didirikan oleh sekelompok individu yang memiliki visi yang sama untuk memajukan produk lokal Indonesia. Kami terdiri dari para profesional di bidang teknologi, desain, dan pemasaran yang bersemangat untuk mewujudkan platform ini.</p>
+        <p>Kami percaya pada kolaborasi dan inovasi untuk terus mengembangkan Lokalook menjadi platform yang bermanfaat bagi semua pihak.</p>
+    </section>
+
+    <section data-aos="fade-up" data-aos-delay="300">
+        <h2 class="mb-4 text-primary"><i class="bi bi-chat-dots-fill me-2"></i> Hubungi Kami</h2>
+        <p>Kami sangat senang mendengar dari Anda! Jika Anda memiliki pertanyaan, saran, atau ingin berkolaborasi, jangan ragu untuk menghubungi kami melalui:</p>
+        <ul class="list-unstyled">
+            <li class="mb-2">
+                <i class="bi bi-envelope-fill text-secondary me-2"></i>
+                <strong>Email:</strong> 
+                <a href="mailto:info@lokalook.com" class="text-decoration-none contact-link">info@lokalook.com</a>
+            </li>
+            <li>
+                <i class="bi bi-instagram text-secondary me-2"></i>
+                <strong>Instagram:</strong> 
+                <a href="https://www.instagram.com/lokalook.id" target="_blank" rel="noopener" class="text-decoration-none contact-link">@lokalook.id</a>
+            </li>
+        </ul>
+    </section>
+</div>
+
+<style>
+  /* Animasi hover pada link kontak */
+  .contact-link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  .contact-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -2px;
+    background-color: #0d6efd; /* bootstrap primary */
+    transition: width 0.3s ease;
+  }
+  .contact-link:hover {
+    color: #0d6efd;
+  }
+  .contact-link:hover::after {
+    width: 100%;
+  }
+</style>
+
+{% endblock %}
